@@ -40,7 +40,7 @@ class Weatherrating(RestoreEntity):
         self._url = url
         self._name = name
         self._state = 0
-        self._attributes = {'morgen': "", 'overmorgen': ""}
+        self._attributes = {}
         self.update()
 
     @property
@@ -88,14 +88,13 @@ class Weatherrating(RestoreEntity):
         #     break
 
         # pollenforecast = dict(zip(days, hayfever_ratings))
-        self._state = hayfever_ratings[0]
         forecast_mapping = {1: "zeer klein",
                   2: "klein",
                   3: "matig",
                   4: "groot",
                   5: "zeer groot"}
         day_mapping = {0: 'vandaag', 1: 'morgen', 2: 'overmorgen', 3: 'over 3 dagen', 4: 'over 4 dagen'}
-
+        self._state = forecast_mapping[hayfever_ratings[0]]
         for i in range(4):
             self._attributes[day_mapping[i]] = forecast_mapping[hayfever_ratings[0]]
 
