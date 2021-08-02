@@ -1,0 +1,11 @@
+{
+  "domain": "ollenforecast",
+  "name": "pollenforecast",
+  "version": "0.0.1",
+  "documentation": "https://github.com/nelbs/Weeronline-pollen-forecast",
+  "requirements": [
+    "bs4==0.0.1"
+  ],
+  "dependencies": [],
+  "codeowners": []
+}
