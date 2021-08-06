@@ -1,7 +1,7 @@
 {
   "domain": "pollenforecast",
   "name": "pollenforecast",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "documentation": "https://github.com/nelbs/Weeronline-pollenforecast",
   "requirements": [
     "bs4==0.0.1"
