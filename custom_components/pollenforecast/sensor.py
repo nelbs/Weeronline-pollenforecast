@@ -31,17 +31,21 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 def setup_platform(hass, config, add_entities, discovery_info=None):
     url = config.get(CONF_URL)
     name = config.get(CONF_NAME)
-    activity = config.get(CONF_TYPE)
-    add_entities([Weatherrating(url, name)], True)
+    add_entities([PollenForecast(url, name)], True)
 
-class Weatherrating(RestoreEntity):
+class PollenForecast(RestoreEntity):
     def __init__(self, url, name):
         # initialiseren sensor
+        self._unique_id = "pollenforecastsensor"
         self._url = url
         self._name = name
         self._state = 0
         self._attributes = {}
         self.update()
+
+    @property
+    def unique_id(self):
+        return self._unique_id
 
     @property
     def name(self):
@@ -88,11 +92,11 @@ class Weatherrating(RestoreEntity):
         #     break
 
         # pollenforecast = dict(zip(days, hayfever_ratings))
-        forecast_mapping = {1: "zeer klein",
-                  2: "klein",
-                  3: "matig",
-                  4: "groot",
-                  5: "zeer groot"}
+        forecast_mapping = {0: "zeer klein",
+                  1: "klein",
+                  2: "matig",
+                  3: "groot",
+                  4: "zeer groot"}
         day_mapping = {0: 'vandaag', 1: 'morgen', 2: 'overmorgen', 3: 'over 3 dagen', 4: 'over 4 dagen'}
         self._state = forecast_mapping[hayfever_ratings[0]]
         for i in range(4):
